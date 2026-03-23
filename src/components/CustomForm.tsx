@@ -11,7 +11,7 @@ const DropdownTreeSelect = DropdownTreeSelectCJS.default;
 interface FormData {
     name: string;
     selectedSectors: string[];
-    consent: boolean;
+    acceptTerms: boolean;
 }
 
 interface SectorNodeDto {
@@ -59,7 +59,7 @@ const CustomForm: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({
         name: '',
         selectedSectors: [],
-        consent: false,
+        acceptTerms: false,
     });
 
     useEffect(() => {
@@ -107,9 +107,9 @@ const CustomForm: React.FC = () => {
             </div>
             <input
                 type="checkbox"
-                checked={formData.consent}
+                checked={formData.acceptTerms}
                 onChange={(e) =>
-                    setFormData({...formData, consent: e.target.checked})
+                    setFormData({...formData, acceptTerms: e.target.checked})
                 }
             />
             <button type="submit">Submit</button>
