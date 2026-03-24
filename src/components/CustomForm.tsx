@@ -34,6 +34,24 @@ const CustomForm: React.FC = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log('Form Data:', userSettings);
+        const postUserSettings = async (): Promise<void> => {
+            try {
+                const response = await apiFetch('/user/settings', {
+                    method: 'POST',
+                    body: JSON.stringify(userSettings),
+                });
+                if (!response.ok) {
+                    console.error('Network error');
+                    return;
+                }
+
+                const data: UserSettings = await response.json();
+                setUserSettings(data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        void postUserSettings();
     };
 
     return (
@@ -45,7 +63,8 @@ const CustomForm: React.FC = () => {
                 onChange={(e) =>
                     setUserSettings({...userSettings, firstName: e.target.value})
                 }
-            />            <input
+            />
+            <input
                 type="text"
                 placeholder="Last name"
                 value={userSettings.lastName}
