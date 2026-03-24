@@ -2,10 +2,10 @@ import {useState} from 'react';
 import * as React from 'react'
 import {apiFetch} from '../services/api.ts'
 import {useNavigate} from 'react-router-dom'
-import type {AuthFormData} from '../types/types.ts'
+import type {RegisterFormData} from '../types/types.ts'
 
 const RegisterForm: React.FC = () => {
-    const [formData, setFormData] = useState<AuthFormData>({
+    const [formData, setFormData] = useState<RegisterFormData>({
         username: '',
         password: '',
         firstName: '',

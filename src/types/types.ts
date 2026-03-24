@@ -1,6 +1,11 @@
 export interface AuthFormData {
     username: string;
     password: string;
+}
+
+export interface RegisterFormData {
+    username: string;
+    password: string;
     firstName: string;
     lastName: string;
 }

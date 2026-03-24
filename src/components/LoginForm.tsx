@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import type {AuthFormData} from '../types/auth';
 import * as React from 'react';
 import {useAuth} from '../context/useAuth.ts'
+import type {AuthFormData} from '../types/types.ts'
 
 const LoginForm: React.FC = () => {
     const [formData, setFormData] = useState<AuthFormData>({
