@@ -1,13 +1,15 @@
 import {useState} from 'react';
-import type {AuthFormData} from '../types/auth';
 import * as React from 'react'
 import {apiFetch} from '../services/api.ts'
 import {useNavigate} from 'react-router-dom'
+import type {AuthFormData} from '../types/types.ts'
 
 const RegisterForm: React.FC = () => {
     const [formData, setFormData] = useState<AuthFormData>({
         username: '',
         password: '',
+        firstName: '',
+        lastName: '',
     });
 
     const [error, setError] = useState<string | null>(null);
@@ -44,6 +46,24 @@ const RegisterForm: React.FC = () => {
                 value={formData.username}
                 onChange={(e) =>
                     setFormData({...formData, username: e.target.value})
+                }
+            />
+            <input
+                name="firstName"
+                type="text"
+                placeholder="First name"
+                value={formData.firstName}
+                onChange={(e) =>
+                    setFormData({...formData, firstName: e.target.value})
+                }
+            />
+            <input
+                name="lastName"
+                type="text"
+                placeholder="Last name"
+                value={formData.lastName}
+                onChange={(e) =>
+                    setFormData({...formData, lastName: e.target.value})
                 }
             />
             <input
