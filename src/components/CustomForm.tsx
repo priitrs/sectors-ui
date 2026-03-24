@@ -6,7 +6,8 @@ import type {UserSettings} from '../types/types.ts'
 const CustomForm: React.FC = () => {
 
     const [userSettings, setUserSettings] = useState<UserSettings>({
-        name: '',
+        firstName: '',
+        lastName: '',
         selectedSectors: [],
         acceptTerms: false,
     });
@@ -39,10 +40,17 @@ const CustomForm: React.FC = () => {
         <form onSubmit={handleSubmit}>
             <input
                 type="text"
-                placeholder="Name"
-                value={userSettings.name}
+                placeholder="First name"
+                value={userSettings.firstName}
                 onChange={(e) =>
-                    setUserSettings({...userSettings, name: e.target.value})
+                    setUserSettings({...userSettings, firstName: e.target.value})
+                }
+            />            <input
+                type="text"
+                placeholder="Last name"
+                value={userSettings.lastName}
+                onChange={(e) =>
+                    setUserSettings({...userSettings, lastName: e.target.value})
                 }
             />
 

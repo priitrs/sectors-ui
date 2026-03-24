@@ -6,7 +6,8 @@ export interface AuthFormData {
 }
 
 export interface UserSettings {
-    name: string;
+    firstName: string;
+    lastName: string;
     selectedSectors: string[];
     acceptTerms: boolean;
 }
