@@ -1,7 +1,8 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {apiFetch} from '../services/api.ts'
-import type {UserSettings} from '../types/types.ts'
+import type { UserSettings} from '../types/types.ts'
+import TreeSelectComponent from './TreeSelectComponent.tsx'
 
 const CustomForm: React.FC = () => {
 
@@ -72,7 +73,9 @@ const CustomForm: React.FC = () => {
                     setUserSettings({...userSettings, lastName: e.target.value})
                 }
             />
+            <TreeSelectComponent>
 
+            </TreeSelectComponent>
             <input
                 type="checkbox"
                 checked={userSettings.acceptTerms}

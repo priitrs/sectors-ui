@@ -16,3 +16,9 @@ export interface UserSettings {
     selectedSectors: string[];
     acceptTerms: boolean;
 }
+
+export interface TreeNode {
+    value: number;
+    title: string;
+    children?: TreeNode[];
+}
