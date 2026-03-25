@@ -3,6 +3,8 @@ import {useEffect, useState} from 'react';
 import {apiFetch} from '../services/api.ts'
 import type {TreeNode, UserSettings} from '../types/types.ts'
 import TreeSelectComponent from './TreeSelectComponent.tsx'
+import { toast } from "react-hot-toast";
+
 
 const CustomForm: React.FC = () => {
 
@@ -64,12 +66,10 @@ const CustomForm: React.FC = () => {
                     console.error('Network error');
                     return;
                 }
-
-                const data: UserSettings = await response.json();
-                setUserSettings(data);
             } catch (err) {
                 console.error(err);
             }
+            toast.success("Settings saved successfully");
         };
         void postUserSettings();
     };
