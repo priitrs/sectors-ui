@@ -4,11 +4,11 @@ import * as React from 'react'
 
 const RegisterPage: React.FC = () => {
     return (
-        <div>
+        <div className="card">
             <h2>Register</h2>
             <RegisterForm/>
 
-            <p>
+            <p className="link-text">
                 Already have an account? <Link to="/">Login</Link>
             </p>
         </div>

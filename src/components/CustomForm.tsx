@@ -76,37 +76,47 @@ const CustomForm: React.FC = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="First name"
-                value={userSettings.firstName}
-                onChange={(e) =>
-                    setUserSettings({...userSettings, firstName: e.target.value})
-                }
-            />
-            <input
-                type="text"
-                placeholder="Last name"
-                value={userSettings.lastName}
-                onChange={(e) =>
-                    setUserSettings({...userSettings, lastName: e.target.value})
-                }
-            />
-            <TreeSelectComponent
-                allValues={sectors}
-                selectedValues={userSettings.selectedSectors}
-                onChange={(selectedSectors) =>
-                    setUserSettings({ ...userSettings, selectedSectors })
-                }
-            />
-            <input
-                type="checkbox"
-                checked={userSettings.acceptTerms}
-                onChange={(e) =>
-                    setUserSettings({...userSettings, acceptTerms: e.target.checked})
-                }
-            />
-            <button type="submit">Submit</button>
+            <div className="form-group">
+                <input
+                    type="text"
+                    placeholder="First name"
+                    required
+                    value={userSettings.firstName}
+                    onChange={(e) =>
+                        setUserSettings({...userSettings, firstName: e.target.value})
+                    }
+                />
+                <input
+                    type="text"
+                    placeholder="Last name"
+                    required
+                    value={userSettings.lastName}
+                    onChange={(e) =>
+                        setUserSettings({...userSettings, lastName: e.target.value})
+                    }
+                />
+                <TreeSelectComponent
+                    allValues={sectors}
+                    selectedValues={userSettings.selectedSectors}
+                    onChange={(selectedSectors) =>
+                        setUserSettings({ ...userSettings, selectedSectors })
+                    }
+                />
+                <div className="form-row">
+                    <input
+                        type="checkbox"
+                        id="acceptTerms"
+                        checked={userSettings.acceptTerms}
+                        onChange={(e) =>
+                            setUserSettings({...userSettings, acceptTerms: e.target.checked})
+                        }
+                    />
+                    <label htmlFor="acceptTerms">I agree to the terms</label>
+                </div>
+            </div>
+            <div className="form-actions">
+                <button type="submit">Save</button>
+            </div>
         </form>
     );
 };

@@ -46,29 +46,32 @@ const LoginForm: React.FC = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input
-                name="username"
-                type="email"
-                placeholder="Email"
-                required
-                value={formData.username}
-                onChange={(e) =>
-                    setFormData({...formData, username: e.target.value})
-                }
-            />
-            <input
-                name="password"
-                type="password"
-                placeholder="Password"
-                required
-                value={formData.password}
-                onChange={(e) =>
-                    setFormData({...formData, password: e.target.value})
-                }
-            />
-            <button type="submit">Login</button>
-
-            {error && <p style={{color: 'red'}}>{error}</p>}
+            <div className="form-group">
+                <input
+                    name="username"
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={formData.username}
+                    onChange={(e) =>
+                        setFormData({...formData, username: e.target.value})
+                    }
+                />
+                <input
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    required
+                    value={formData.password}
+                    onChange={(e) =>
+                        setFormData({...formData, password: e.target.value})
+                    }
+                />
+            </div>
+            <div className="form-actions">
+                <button type="submit">Login</button>
+            </div>
+            {error && <p className="error-text">{error}</p>}
         </form>
     );
 };

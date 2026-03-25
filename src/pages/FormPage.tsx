@@ -16,11 +16,14 @@ const FormPage: React.FC = () => {
     };
 
     return (
-        <div>
-            <h2>Form Page</h2>
-            <CustomForm />
-
-            <button onClick={handleLogout}>Logout</button>
+        <div className="page">
+            <div className="page-header">
+                <h2>My Profile</h2>
+                <button onClick={handleLogout}>Logout</button>
+            </div>
+            <div className="card card-wide">
+                <CustomForm />
+            </div>
         </div>
     );
 };

@@ -58,32 +58,38 @@ export default function RegisterForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input
-                {...register("username")}
-                placeholder="Email"
-            />
-            {errors.username && <span>{errors.username.message}</span>}
+            <div className="form-group">
+                <input
+                    {...register("username")}
+                    type={"email"}
+                    placeholder="Email"
+                />
+                <span className="error-text">{errors.username?.message ?? ''}</span>
 
-            <input
-                {...register("firstName")}
-                placeholder="First name"
-            />
-            {errors.firstName && <span>{errors.firstName.message}</span>}
+                <input
+                    {...register("firstName")}
+                    type={"text"}
+                    placeholder="First name"
+                />
+                <span className="error-text">{errors.firstName?.message ?? ''}</span>
 
-            <input
-                {...register("lastName")}
-                placeholder="Last name"
-            />
-            {errors.lastName && <span>{errors.lastName.message}</span>}
+                <input
+                    {...register("lastName")}
+                    type={"text"}
+                    placeholder="Last name"
+                />
+                <span className="error-text">{errors.lastName?.message ?? ''}</span>
 
-            <input
-                {...register("password")}
-                type="password"
-                placeholder="Password"
-            />
-            {errors.password && <span>{errors.password.message}</span>}
-
-            <button type="submit">Register</button>
+                <input
+                    {...register("password")}
+                    type="password"
+                    placeholder="Password"
+                />
+                <span className="error-text">{errors.password?.message ?? ''}</span>
+            </div>
+            <div className="form-actions">
+                <button type="submit">Register</button>
+            </div>
         </form>
     );
 }
