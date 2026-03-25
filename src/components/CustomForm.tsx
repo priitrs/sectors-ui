@@ -98,6 +98,7 @@ const CustomForm: React.FC = () => {
                         setUserSettings({...userSettings, lastName: e.target.value})
                     }
                 />
+                <label style={{ paddingTop: '20px' }}>Please select the sectors you are currently involved in:</label>
                 <TreeSelectComponent
                     allValues={sectors}
                     selectedValues={userSettings.selectedSectors}
@@ -105,7 +106,7 @@ const CustomForm: React.FC = () => {
                         setUserSettings({ ...userSettings, selectedSectors })
                     }
                 />
-                <div className="form-row">
+                <div className="form-row" style={{ paddingTop: '20px' }}>
                     <input
                         type="checkbox"
                         id="acceptTerms"
