@@ -3,6 +3,7 @@ import * as React from 'react'
 import {apiFetch} from '../services/api.ts'
 import {useNavigate} from 'react-router-dom'
 import type {RegisterFormData} from '../types/types.ts'
+import {toast} from 'react-hot-toast'
 
 const RegisterForm: React.FC = () => {
     const [formData, setFormData] = useState<RegisterFormData>({
@@ -12,12 +13,10 @@ const RegisterForm: React.FC = () => {
         lastName: '',
     });
 
-    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setError(null);
 
         try {
             const res = await apiFetch('/auth/register', {
@@ -27,12 +26,11 @@ const RegisterForm: React.FC = () => {
 
             if (res.ok) {
                 navigate('/');
+                toast.success("Registration successful, log in to continue");
             } else {
-                const data = await res.json();
-                setError(data.message || 'Registration failed');
+                console.error('Registration failed');
             }
         } catch (err) {
-            setError('Network error');
             console.error(err);
         }
     };
@@ -76,8 +74,6 @@ const RegisterForm: React.FC = () => {
                 }
             />
             <button type="submit">Register</button>
-
-            {error && <p style={{color: 'red'}}>{error}</p>}
         </form>
     );
 };
