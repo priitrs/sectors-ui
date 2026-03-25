@@ -21,35 +21,36 @@ const CustomForm: React.FC = () => {
         const fetchSectors = async (): Promise<void> => {
             try {
                 const response = await apiFetch('/sectors');
-                if (!response.ok) {
-                    console.error('Network error');
-                    return;
+                if (response.ok) {
+                    const data: TreeNode[] = await response.json();
+                    setSectors(data);
+                } else {
+                    const errorData = await response.json().catch(() => null);
+                    const message = errorData ? Object.values(errorData).join(', ') : 'Loading sectors failed';
+                    toast.error(message);
                 }
+            } catch (err) {
+                console.error(err);
+            }
+        };
 
-                const data: TreeNode[] = await response.json();
-                setSectors(data);
+        const fetchUserSettings = async (): Promise<void> => {
+            try {
+                const response = await apiFetch('/user/settings');
+                if (response.ok) {
+                    const data: UserSettings = await response.json();
+                    setUserSettings(data);
+                } else {
+                    const errorData = await response.json().catch(() => null);
+                    const message = errorData ? Object.values(errorData).join(', ') : 'Loading user settings failed';
+                    toast.error(message);
+                }
             } catch (err) {
                 console.error(err);
             }
         };
 
         void fetchSectors();
-
-        const fetchUserSettings = async (): Promise<void> => {
-            try {
-                const response = await apiFetch('/user/settings');
-                if (!response.ok) {
-                    console.error('Network error');
-                    return;
-                }
-
-                const data: UserSettings = await response.json();
-                setUserSettings(data);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
         void fetchUserSettings();
     }, []);
 
@@ -63,7 +64,9 @@ const CustomForm: React.FC = () => {
                     body: JSON.stringify(userSettings),
                 });
                 if (!response.ok) {
-                    console.error('Setting saving error');
+                    const errorData = await response.json().catch(() => null);
+                    const message = errorData ? Object.values(errorData).join(', ') : 'Saving user settings failed';
+                    toast.error(message);
                     return;
                 }
             } catch (err) {
