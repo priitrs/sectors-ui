@@ -1,27 +1,17 @@
 import { TreeSelect } from 'antd';
 import type { TreeNode } from '../types/types.ts';
 
-const treeData: TreeNode[] = [
-    {
-        value: 1,
-        title: 'Manufacturing',
-        children: [
-            { value: 2, title: 'Construction materials', children: [] },
-            { value: 3, title: 'Electronics and Optics', children: [] },
-        ],
-    },
-];
-
 type TreeSelectComponentProps = {
-    value: number[];
+    allValues: TreeNode[];
+    selectedValues: number[];
     onChange: (values: number[]) => void;
 };
 
-export default function TreeSelectComponent({ value, onChange }: TreeSelectComponentProps) {
+export default function TreeSelectComponent({ allValues, selectedValues, onChange }: TreeSelectComponentProps) {
     return (
         <TreeSelect<number[]>
-            treeData={treeData}
-            value={value}
+            treeData={allValues}
+            value={selectedValues}
             onChange={(newValue) => onChange(newValue)}
             treeCheckable
             showCheckedStrategy={TreeSelect.SHOW_CHILD}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {apiFetch} from '../services/api.ts'
-import type { UserSettings} from '../types/types.ts'
+import type {TreeNode, UserSettings} from '../types/types.ts'
 import TreeSelectComponent from './TreeSelectComponent.tsx'
 
 const CustomForm: React.FC = () => {
@@ -13,7 +13,26 @@ const CustomForm: React.FC = () => {
         acceptTerms: false,
     });
 
+    const [sectors, setSectors] = useState<TreeNode[]>([]);
+
     useEffect(() => {
+        const fetchSectors = async (): Promise<void> => {
+            try {
+                const response = await apiFetch('/sectors');
+                if (!response.ok) {
+                    console.error('Network error');
+                    return;
+                }
+
+                const data: TreeNode[] = await response.json();
+                setSectors(data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        void fetchSectors();
+
         const fetchUserSettings = async (): Promise<void> => {
             try {
                 const response = await apiFetch('/user/settings');
@@ -74,12 +93,12 @@ const CustomForm: React.FC = () => {
                 }
             />
             <TreeSelectComponent
-                value={userSettings.selectedSectors}
+                allValues={sectors}
+                selectedValues={userSettings.selectedSectors}
                 onChange={(selectedSectors) =>
                     setUserSettings({ ...userSettings, selectedSectors })
                 }
             />
-
             <input
                 type="checkbox"
                 checked={userSettings.acceptTerms}

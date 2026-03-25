@@ -13,7 +13,7 @@ export interface RegisterFormData {
 export interface UserSettings {
     firstName: string;
     lastName: string;
-    selectedSectors: string[];
+    selectedSectors: number[];
     acceptTerms: boolean;
 }
 
