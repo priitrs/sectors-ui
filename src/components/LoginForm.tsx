@@ -4,6 +4,7 @@ import * as React from 'react';
 import {useAuth} from '../context/useAuth.ts'
 import type {AuthFormData} from '../types/types.ts'
 import {toast} from 'react-hot-toast'
+import {apiFetch} from '../services/api.ts'
 
 const LoginForm: React.FC = () => {
     const [formData, setFormData] = useState<AuthFormData>({
@@ -21,10 +22,9 @@ const LoginForm: React.FC = () => {
         formBody.append('password', formData.password);
 
         try {
-            const res = await fetch('http://localhost:8000/api/auth/login', {
+            const res = await apiFetch('/auth/login', {
                 method: 'POST',
                 body: formBody,
-                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },

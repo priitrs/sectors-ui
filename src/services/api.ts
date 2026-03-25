@@ -1,5 +1,5 @@
 export const apiFetch = (url: string, options: RequestInit = {}) => {
-    return fetch('http://localhost:8000/api' + url, {
+    return fetch('/api' + url, {
         ...options,
         credentials: 'include',
         headers: {
