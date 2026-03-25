@@ -63,7 +63,7 @@ const CustomForm: React.FC = () => {
                     body: JSON.stringify(userSettings),
                 });
                 if (!response.ok) {
-                    console.error('Network error');
+                    console.error('Setting saving error');
                     return;
                 }
             } catch (err) {
