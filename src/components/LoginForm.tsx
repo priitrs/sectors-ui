@@ -3,19 +3,18 @@ import {useNavigate} from 'react-router-dom';
 import * as React from 'react';
 import {useAuth} from '../context/useAuth.ts'
 import type {AuthFormData} from '../types/types.ts'
+import {toast} from 'react-hot-toast'
 
 const LoginForm: React.FC = () => {
     const [formData, setFormData] = useState<AuthFormData>({
         username: '',
         password: '',
     });
-    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
     const {checkAuth} = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError(null);
 
         const formBody = new URLSearchParams();
         formBody.append('username', formData.username);
@@ -35,11 +34,11 @@ const LoginForm: React.FC = () => {
                 await checkAuth();
                 navigate('/form');
             } else {
-                const data = await res.json();
-                setError(data.message || 'Login failed');
+                const errorData = await res.json().catch(() => null);
+                const message = errorData ? Object.values(errorData).join(', ') : 'Login failed';
+                toast.error(message);
             }
         } catch (err) {
-            setError('Sign in failed');
             console.error(err);
         }
     };
@@ -71,7 +70,6 @@ const LoginForm: React.FC = () => {
             <div className="form-actions">
                 <button type="submit">Login</button>
             </div>
-            {error && <p className="error-text">{error}</p>}
         </form>
     );
 };
