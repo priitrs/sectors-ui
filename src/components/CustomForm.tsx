@@ -73,9 +73,13 @@ const CustomForm: React.FC = () => {
                     setUserSettings({...userSettings, lastName: e.target.value})
                 }
             />
-            <TreeSelectComponent>
+            <TreeSelectComponent
+                value={userSettings.selectedSectors}
+                onChange={(selectedSectors) =>
+                    setUserSettings({ ...userSettings, selectedSectors })
+                }
+            />
 
-            </TreeSelectComponent>
             <input
                 type="checkbox"
                 checked={userSettings.acceptTerms}

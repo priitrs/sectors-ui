@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { TreeSelect } from 'antd';
-import type {TreeNode} from '../types/types.ts'
+import type { TreeNode } from '../types/types.ts';
 
 const treeData: TreeNode[] = [
     {
@@ -13,14 +12,17 @@ const treeData: TreeNode[] = [
     },
 ];
 
-export default function TreeSelectComponent() {
-    const [selectedValues, setSelectedValues] = useState<number[]>([2]);
+type TreeSelectComponentProps = {
+    value: number[];
+    onChange: (values: number[]) => void;
+};
 
+export default function TreeSelectComponent({ value, onChange }: TreeSelectComponentProps) {
     return (
         <TreeSelect<number[]>
             treeData={treeData}
-            value={selectedValues}
-            onChange={(newValue) => setSelectedValues(newValue)}
+            value={value}
+            onChange={(newValue) => onChange(newValue)}
             treeCheckable
             showCheckedStrategy={TreeSelect.SHOW_CHILD}
             placeholder="Select your sectors"
