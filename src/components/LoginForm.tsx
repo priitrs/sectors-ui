@@ -39,7 +39,7 @@ const LoginForm: React.FC = () => {
                 setError(data.message || 'Login failed');
             }
         } catch (err) {
-            setError('Network error');
+            setError('Sign in failed');
             console.error(err);
         }
     };
@@ -50,6 +50,7 @@ const LoginForm: React.FC = () => {
                 name="username"
                 type="email"
                 placeholder="Email"
+                required
                 value={formData.username}
                 onChange={(e) =>
                     setFormData({...formData, username: e.target.value})
@@ -59,6 +60,7 @@ const LoginForm: React.FC = () => {
                 name="password"
                 type="password"
                 placeholder="Password"
+                required
                 value={formData.password}
                 onChange={(e) =>
                     setFormData({...formData, password: e.target.value})
