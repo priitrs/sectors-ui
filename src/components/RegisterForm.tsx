@@ -49,7 +49,9 @@ export default function RegisterForm() {
                 navigate('/');
                 toast.success("Registration successful, log in to continue");
             } else {
-                console.error('Registration failed');
+                const errorData = await res.json().catch(() => null);
+                const message = errorData ? Object.values(errorData).join(', ') : 'Registration failed';
+                toast.error(message);
             }
         } catch (err) {
             console.error(err);
