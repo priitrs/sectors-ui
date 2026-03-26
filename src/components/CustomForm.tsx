@@ -56,7 +56,6 @@ const CustomForm: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('Form Data:', userSettings);
         const postUserSettings = async (): Promise<void> => {
             try {
                 const response = await apiFetch('/user/settings', {
@@ -68,12 +67,16 @@ const CustomForm: React.FC = () => {
                     const message = errorData ? Object.values(errorData).join(', ') : 'Saving user settings failed';
                     toast.error(message);
                     return;
+                } else {
+                    const data: UserSettings = await response.json();
+                    setUserSettings(data);
+                    toast.success("Settings saved successfully");
                 }
             } catch (err) {
                 console.error(err);
             }
-            toast.success("Settings saved successfully");
         };
+
         void postUserSettings();
     };
 
